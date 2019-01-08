@@ -9,6 +9,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import pages.LoginPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,9 @@ public class LoginStep extends BaseUtil {
 
     @And("^I click login button$")
     public void iClickLoginButton() {
+        LoginPage loginPage = new LoginPage(base.Driver);
+        loginPage.clickOnButton();
 
-        base.Driver.findElement(By.xpath("//*[@id=\"loginButton-lgwgLoginButton\"]/span")).click();
-        System.out.println("I click login button");
         
     }
 
@@ -54,11 +55,11 @@ public class LoginStep extends BaseUtil {
         // Store all the users
         users = table.asList(User.class);
 
+        LoginPage loginPage = new LoginPage(base.Driver);
+
         for(User user: users){
-            base.Driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-             base.Driver.findElement(By.xpath("//*[@id=\"userName\"]")).sendKeys(user.username);
-            base.Driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-             base.Driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(user.password);
+
+            loginPage.login(user.username, user.password);
         }
     }
 
