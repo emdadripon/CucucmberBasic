@@ -45,7 +45,7 @@ public class LoginStep extends BaseUtil {
     }
 
     @And("^I  enter the the following for login$")
-    public void iEnterTheTheFollowingForLogin(DataTable table) {
+    public void iEnterTheTheFollowingForLogin(DataTable table) throws InterruptedException {
        /* List<List<String>> data = table.raw();
 
         System.out.print("The Value is : " + data.get(0).get(0).toString());
@@ -80,6 +80,10 @@ public class LoginStep extends BaseUtil {
         System.out.println("My Salary digits count is: " + salary);
     }
 
+    @And("^I should see the userform page wrongly$")
+    public void iShouldSeeTheUserformPageWrongly() {
+        Assert.assertEquals("It's not display", base.Driver.findElement(By.xpath("jkglkjlkjhl")).isDisplayed(), true);
+    }
 
 
     public class User {

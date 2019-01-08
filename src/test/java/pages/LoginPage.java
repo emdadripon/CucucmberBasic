@@ -12,17 +12,17 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(how = How.XPATH, using = "userName")
+    @FindBy(how = How.XPATH, using = "//*[@id=\"userName\"]")
     public WebElement txtUserName;
 
-    @FindBy(how = How.XPATH, using = "Password")
+    @FindBy(how = How.XPATH, using = "//*[@id=\"password\"]")
     public WebElement txtPassword;
 
-    @FindBy(how = How.XPATH, using = "Login")
+    @FindBy(how = How.XPATH, using = "//*[@id=\"loginButton-lgwgLoginButton\"]")
     public WebElement btnLogin;
 
-    public void login(String userName, String password){
-
+    public void login(String userName, String password) throws InterruptedException {
+        Thread.sleep(3000);
         txtUserName.sendKeys(userName);
         txtPassword.sendKeys(password);
     }
