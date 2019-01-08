@@ -9,10 +9,9 @@ Feature: LoginFeature
     And I click login button
     And I should see the userform page
 
-  Scenario Outline: Login wiht correct username and password using Scenario outline
+  Scenario Outline: Login with correct username and password using Scenario outline
     Given I navigate to the login page
     And I  enter the <username> and <password>
-
     And I click login button
     And I should see the userform page
 

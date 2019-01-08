@@ -4,6 +4,7 @@ import Base.BaseUtil;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Hook extends BaseUtil {
 
@@ -15,9 +16,10 @@ public class Hook extends BaseUtil {
 
     @Before
     public void initializeTest(){
-        System.out.println("Opening the browser : MOCK");
 
-        base.StepInfo = "FirefoxDriver";
+        System.out.println("Opening the browser : MOCK");
+        System.setProperty("webdriver.firefox.marionette", "C:\\Users\\eripo\\IdeaProjects\\CucumberBasic\\driver\\geckodriver.exe");
+        base.Driver = new FirefoxDriver();
 
     }
 
