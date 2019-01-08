@@ -7,9 +7,12 @@ import cucumber.api.DataTable;
 import cucumber.api.Transform;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class LoginStep extends BaseUtil {
     private BaseUtil base;
@@ -21,11 +24,14 @@ public class LoginStep extends BaseUtil {
     @Given("^I navigate to the login page$")
     public void iNavigateToTheLoginPage() {
         base.Driver.navigate().to("https://www.att.com/my/#/login");
+        base.Driver.manage().window().maximize();
         System.out.println("I navigate to the login page");
     }
 
     @And("^I click login button$")
     public void iClickLoginButton() {
+
+        base.Driver.findElement(By.xpath("//*[@id=\"loginButton-lgwgLoginButton\"]/span")).click();
         System.out.println("I click login button");
         
     }
@@ -33,6 +39,7 @@ public class LoginStep extends BaseUtil {
     @And("^I should see the userform page$")
     public void iShouldSeeTheUserformPage() {
 
+        Assert.assertEquals("It's not display", base.Driver.findElement(By.xpath("//*[@id=\"welcomeTitle\"]")).isDisplayed(), true);
         System.out.println("I should see the userform page");
     }
 
@@ -48,8 +55,10 @@ public class LoginStep extends BaseUtil {
         users = table.asList(User.class);
 
         for(User user: users){
-            System.out.println("The UserName is " + user.username);
-            System.out.println("The PassWord is " + user.password);
+            base.Driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+             base.Driver.findElement(By.xpath("//*[@id=\"userName\"]")).sendKeys(user.username);
+            base.Driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+             base.Driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(user.password);
         }
     }
 
